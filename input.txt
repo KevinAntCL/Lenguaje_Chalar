@@ -1,0 +1,87 @@
+Code_Initialization Program_Name ProgramaCompiladores:
+
+Library_Section:
+
+Import < system >;
+Import < math >;
+Import < stdio >;
+
+Library_Section_End();
+
+Variables_Section:
+
+Float dinero;
+Int edad;
+SingleChar letra;
+Double millones;
+String saludo;
+DateType fechanacimiento;
+
+Variables_Section_End();
+
+Main_Section:
+
+a;
+
+t = h + r;
+f = r - g;
+z = j * e;
+g = k / m;
+
+While(a > b)
+{
+	a = c;
+	b = g;
+};
+
+While(g < t)
+{
+	i = o;
+	b = l;
+};
+
+While(r == s)
+{
+	t = u;
+	e = r;
+};
+
+While(c != j)
+{
+	a = c;
+	b = g;
+};
+
+For(a;a;a) a = g;
+
+For(a;b;c)
+{
+	a = b;
+	c = d;
+};
+
+If( a > b)
+{
+	g = k / m;
+};
+
+If( a < b)
+{
+	f = r - g;
+};
+
+If( a == b)
+{
+	z = j * e;
+};
+
+If( a != b)
+{
+	t = h + r;
+};
+
+Main_Section_End();
+
+Code_End();
+     
+     

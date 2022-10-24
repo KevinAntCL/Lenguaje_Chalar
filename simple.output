@@ -1,0 +1,419 @@
+Grammar
+
+    0 $accept: programa $end
+
+    1 programa: PROGRAM IDENTIFIER PUNTOYCOMA declarationSection programSection
+
+    2 programSection: TBEGIN listaSentencias TEND PUNTOYCOMA
+
+    3 listaSentencias: sentencia
+    4                | sentencia listaSentencias
+
+    5 sentencia: IDENTIFIER PUNTOYCOMA
+    6          | IDENTIFIER ASIGNACION IDENTIFIER PUNTOYCOMA
+    7          | TFOR PARABRE IDENTIFIER PUNTOYCOMA IDENTIFIER PUNTOYCOMA IDENTIFIER PARCIERRA sentencia
+    8          | ABRELLAVE listaSentencias CIERRALLAVE PUNTOYCOMA
+
+    9 declarationSection: VAR declarations
+
+   10 declarations: declaration
+   11             | declaration declarations
+
+   12 declaration: type_specifier identifier_dum PUNTOYCOMA
+
+   13 type_specifier: FLOAT
+   14               | INT
+
+   15 identifier_dum: IDENTIFIER
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    FLOAT (258) 13
+    INT (259) 14
+    IDENTIFIER <sval> (260) 1 5 6 7 15
+    PROGRAM (261) 1
+    VAR (262) 9
+    PUNTOYCOMA (263) 1 2 5 6 7 8 12
+    TBEGIN (264) 2
+    TEND (265) 2
+    ASIGNACION (266) 6
+    TFOR (267) 7
+    PARABRE (268) 7
+    PARCIERRA (269) 7
+    ABRELLAVE (270) 8
+    CIERRALLAVE (271) 8
+
+
+Nonterminals, with rules where they appear
+
+    $accept (17)
+        on left: 0
+    programa (18)
+        on left: 1
+        on right: 0
+    programSection (19)
+        on left: 2
+        on right: 1
+    listaSentencias (20)
+        on left: 3 4
+        on right: 2 4 8
+    sentencia (21)
+        on left: 5 6 7 8
+        on right: 3 4 7
+    declarationSection (22)
+        on left: 9
+        on right: 1
+    declarations (23)
+        on left: 10 11
+        on right: 9 11
+    declaration (24)
+        on left: 12
+        on right: 10 11
+    type_specifier (25)
+        on left: 13 14
+        on right: 12
+    identifier_dum (26)
+        on left: 15
+        on right: 12
+
+
+State 0
+
+    0 $accept: . programa $end
+
+    PROGRAM  shift, and go to state 1
+
+    programa  go to state 2
+
+
+State 1
+
+    1 programa: PROGRAM . IDENTIFIER PUNTOYCOMA declarationSection programSection
+
+    IDENTIFIER  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: programa . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 programa: PROGRAM IDENTIFIER . PUNTOYCOMA declarationSection programSection
+
+    PUNTOYCOMA  shift, and go to state 5
+
+
+State 4
+
+    0 $accept: programa $end .
+
+    $default  accept
+
+
+State 5
+
+    1 programa: PROGRAM IDENTIFIER PUNTOYCOMA . declarationSection programSection
+
+    VAR  shift, and go to state 6
+
+    declarationSection  go to state 7
+
+
+State 6
+
+    9 declarationSection: VAR . declarations
+
+    FLOAT  shift, and go to state 8
+    INT    shift, and go to state 9
+
+    declarations    go to state 10
+    declaration     go to state 11
+    type_specifier  go to state 12
+
+
+State 7
+
+    1 programa: PROGRAM IDENTIFIER PUNTOYCOMA declarationSection . programSection
+
+    TBEGIN  shift, and go to state 13
+
+    programSection  go to state 14
+
+
+State 8
+
+   13 type_specifier: FLOAT .
+
+    $default  reduce using rule 13 (type_specifier)
+
+
+State 9
+
+   14 type_specifier: INT .
+
+    $default  reduce using rule 14 (type_specifier)
+
+
+State 10
+
+    9 declarationSection: VAR declarations .
+
+    $default  reduce using rule 9 (declarationSection)
+
+
+State 11
+
+   10 declarations: declaration .
+   11             | declaration . declarations
+
+    FLOAT  shift, and go to state 8
+    INT    shift, and go to state 9
+
+    $default  reduce using rule 10 (declarations)
+
+    declarations    go to state 15
+    declaration     go to state 11
+    type_specifier  go to state 12
+
+
+State 12
+
+   12 declaration: type_specifier . identifier_dum PUNTOYCOMA
+
+    IDENTIFIER  shift, and go to state 16
+
+    identifier_dum  go to state 17
+
+
+State 13
+
+    2 programSection: TBEGIN . listaSentencias TEND PUNTOYCOMA
+
+    IDENTIFIER  shift, and go to state 18
+    TFOR        shift, and go to state 19
+    ABRELLAVE   shift, and go to state 20
+
+    listaSentencias  go to state 21
+    sentencia        go to state 22
+
+
+State 14
+
+    1 programa: PROGRAM IDENTIFIER PUNTOYCOMA declarationSection programSection .
+
+    $default  reduce using rule 1 (programa)
+
+
+State 15
+
+   11 declarations: declaration declarations .
+
+    $default  reduce using rule 11 (declarations)
+
+
+State 16
+
+   15 identifier_dum: IDENTIFIER .
+
+    $default  reduce using rule 15 (identifier_dum)
+
+
+State 17
+
+   12 declaration: type_specifier identifier_dum . PUNTOYCOMA
+
+    PUNTOYCOMA  shift, and go to state 23
+
+
+State 18
+
+    5 sentencia: IDENTIFIER . PUNTOYCOMA
+    6          | IDENTIFIER . ASIGNACION IDENTIFIER PUNTOYCOMA
+
+    PUNTOYCOMA  shift, and go to state 24
+    ASIGNACION  shift, and go to state 25
+
+
+State 19
+
+    7 sentencia: TFOR . PARABRE IDENTIFIER PUNTOYCOMA IDENTIFIER PUNTOYCOMA IDENTIFIER PARCIERRA sentencia
+
+    PARABRE  shift, and go to state 26
+
+
+State 20
+
+    8 sentencia: ABRELLAVE . listaSentencias CIERRALLAVE PUNTOYCOMA
+
+    IDENTIFIER  shift, and go to state 18
+    TFOR        shift, and go to state 19
+    ABRELLAVE   shift, and go to state 20
+
+    listaSentencias  go to state 27
+    sentencia        go to state 22
+
+
+State 21
+
+    2 programSection: TBEGIN listaSentencias . TEND PUNTOYCOMA
+
+    TEND  shift, and go to state 28
+
+
+State 22
+
+    3 listaSentencias: sentencia .
+    4                | sentencia . listaSentencias
+
+    IDENTIFIER  shift, and go to state 18
+    TFOR        shift, and go to state 19
+    ABRELLAVE   shift, and go to state 20
+
+    $default  reduce using rule 3 (listaSentencias)
+
+    listaSentencias  go to state 29
+    sentencia        go to state 22
+
+
+State 23
+
+   12 declaration: type_specifier identifier_dum PUNTOYCOMA .
+
+    $default  reduce using rule 12 (declaration)
+
+
+State 24
+
+    5 sentencia: IDENTIFIER PUNTOYCOMA .
+
+    $default  reduce using rule 5 (sentencia)
+
+
+State 25
+
+    6 sentencia: IDENTIFIER ASIGNACION . IDENTIFIER PUNTOYCOMA
+
+    IDENTIFIER  shift, and go to state 30
+
+
+State 26
+
+    7 sentencia: TFOR PARABRE . IDENTIFIER PUNTOYCOMA IDENTIFIER PUNTOYCOMA IDENTIFIER PARCIERRA sentencia
+
+    IDENTIFIER  shift, and go to state 31
+
+
+State 27
+
+    8 sentencia: ABRELLAVE listaSentencias . CIERRALLAVE PUNTOYCOMA
+
+    CIERRALLAVE  shift, and go to state 32
+
+
+State 28
+
+    2 programSection: TBEGIN listaSentencias TEND . PUNTOYCOMA
+
+    PUNTOYCOMA  shift, and go to state 33
+
+
+State 29
+
+    4 listaSentencias: sentencia listaSentencias .
+
+    $default  reduce using rule 4 (listaSentencias)
+
+
+State 30
+
+    6 sentencia: IDENTIFIER ASIGNACION IDENTIFIER . PUNTOYCOMA
+
+    PUNTOYCOMA  shift, and go to state 34
+
+
+State 31
+
+    7 sentencia: TFOR PARABRE IDENTIFIER . PUNTOYCOMA IDENTIFIER PUNTOYCOMA IDENTIFIER PARCIERRA sentencia
+
+    PUNTOYCOMA  shift, and go to state 35
+
+
+State 32
+
+    8 sentencia: ABRELLAVE listaSentencias CIERRALLAVE . PUNTOYCOMA
+
+    PUNTOYCOMA  shift, and go to state 36
+
+
+State 33
+
+    2 programSection: TBEGIN listaSentencias TEND PUNTOYCOMA .
+
+    $default  reduce using rule 2 (programSection)
+
+
+State 34
+
+    6 sentencia: IDENTIFIER ASIGNACION IDENTIFIER PUNTOYCOMA .
+
+    $default  reduce using rule 6 (sentencia)
+
+
+State 35
+
+    7 sentencia: TFOR PARABRE IDENTIFIER PUNTOYCOMA . IDENTIFIER PUNTOYCOMA IDENTIFIER PARCIERRA sentencia
+
+    IDENTIFIER  shift, and go to state 37
+
+
+State 36
+
+    8 sentencia: ABRELLAVE listaSentencias CIERRALLAVE PUNTOYCOMA .
+
+    $default  reduce using rule 8 (sentencia)
+
+
+State 37
+
+    7 sentencia: TFOR PARABRE IDENTIFIER PUNTOYCOMA IDENTIFIER . PUNTOYCOMA IDENTIFIER PARCIERRA sentencia
+
+    PUNTOYCOMA  shift, and go to state 38
+
+
+State 38
+
+    7 sentencia: TFOR PARABRE IDENTIFIER PUNTOYCOMA IDENTIFIER PUNTOYCOMA . IDENTIFIER PARCIERRA sentencia
+
+    IDENTIFIER  shift, and go to state 39
+
+
+State 39
+
+    7 sentencia: TFOR PARABRE IDENTIFIER PUNTOYCOMA IDENTIFIER PUNTOYCOMA IDENTIFIER . PARCIERRA sentencia
+
+    PARCIERRA  shift, and go to state 40
+
+
+State 40
+
+    7 sentencia: TFOR PARABRE IDENTIFIER PUNTOYCOMA IDENTIFIER PUNTOYCOMA IDENTIFIER PARCIERRA . sentencia
+
+    IDENTIFIER  shift, and go to state 18
+    TFOR        shift, and go to state 19
+    ABRELLAVE   shift, and go to state 20
+
+    sentencia  go to state 41
+
+
+State 41
+
+    7 sentencia: TFOR PARABRE IDENTIFIER PUNTOYCOMA IDENTIFIER PUNTOYCOMA IDENTIFIER PARCIERRA sentencia .
+
+    $default  reduce using rule 7 (sentencia)
